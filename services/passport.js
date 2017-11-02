@@ -16,25 +16,26 @@ passport.deserializeUser((id, done) => {
 })
 
 passport.use(
-  new GoogleStrategy({
-    clientID: keys.googleClientId,
-    clientSecret: keys.googleClientSecret,
-    callbackURL: '/auth/google/callback',
-    proxy: true
-  }, (accessToken, refreshToken, profile, done) => {
-    const request = { googleId: profile.id }
-    User.findOne(request).then(existedUser => {
-      const finish = (user) => done(null/* no errors */, user)
-      if(existedUser) {
-        // update in the future
-        finish(existedUser)
-      } else {
-        new User(request).save().then(newUser => {
-          finish(newUser)
-        })
-      }
-    })
-
-
-  })
+  new GoogleStrategy(
+    {
+      clientID: keys.googleClientId,
+      clientSecret: keys.googleClientSecret,
+      callbackURL: '/auth/google/callback',
+      proxy: true
+    },
+    async (accessToken, refreshToken, profile, done) => {
+      const request = { googleId: profile.id }
+      User.findOne(request).then(existedUser => {
+        const finish = user => done(null /* no errors */, user)
+        if (existedUser) {
+          // update in the future
+          finish(existedUser)
+        } else {
+          new User(request).save().then(newUser => {
+            finish(newUser)
+          })
+        }
+      })
+    }
+  )
 )
