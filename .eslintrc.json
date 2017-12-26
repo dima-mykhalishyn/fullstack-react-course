@@ -1,0 +1,19 @@
+{
+  "parserOptions": {
+    "ecmaVersion": 6
+  },
+  "plugins": ["prettier"],
+  "env": {
+    "es6": true,
+    "node": true
+  },
+  "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "semi": false,
+        "singleQuote": true
+      }
+    ]
+  }
+}

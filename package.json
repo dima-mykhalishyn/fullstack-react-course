@@ -12,6 +12,7 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "lint": "eslint --parser-options=\"ecmaVersion:8\" .",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=FALSE npm install --prefix client && npm run build --prefix client"
   },
   "repository": {
@@ -32,6 +33,8 @@
     "nodemon": "^1.12.1",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
+    "redux-form": "^7.2.0",
+    "sendgrid": "^5.2.3",
     "stripe": "^5.2.0"
   },
   "devDependencies": {
@@ -39,5 +42,19 @@
     "eslint-plugin-node": "^5.1.1",
     "eslint-plugin-prettier": "^2.2.0",
     "prettier": "^1.7.0"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "node": true
+    },
+    "rules": {
+      "sort-keys": "error"
+    }
+  },
+  "prettier": {
+    "bracketSpacing": true,
+    "semi": false,
+    "singleQuote": true
   }
 }
